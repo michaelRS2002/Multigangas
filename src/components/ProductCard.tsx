@@ -5,6 +5,7 @@ import { useCartStore } from '@/store/cart';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, ShoppingCart, Copy, ChevronLeft, ChevronRight } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((state) => state.addItem);
@@ -15,7 +16,9 @@ export function ProductCard({ product }: { product: Product }) {
 
   const handleAddToCart = () => {
     addItem(product);
-    alert('Producto agregado al carrito');
+    toast.success('Producto agregado al carrito', {
+      duration: 2000,
+    });
   };
 
   const handleDownload = async () => {

@@ -12,6 +12,7 @@ export interface Product {
   description: string;
   price: number;
   images: ProductImage[];
+  category_id?: string;
 }
 
 export interface CartItem {
@@ -23,6 +24,7 @@ interface CartState {
   items: CartItem[];
   addItem: (product: Product) => void;
   removeItem: (productId: string) => void;
+  decreaseItem: (productId: string) => void;
   clearCart: () => void;
   getTotal: () => number;
 }
@@ -51,6 +53,24 @@ export const useCartStore = create<CartState>()(
         set({
           items: get().items.filter((item) => item.product.id !== productId),
         });
+      },
+      decreaseItem: (productId) => {
+        const items = get().items;
+        const existingItem = items.find((item) => item.product.id === productId);
+
+        if (existingItem && existingItem.quantity > 1) {
+          set({
+            items: items.map((item) =>
+              item.product.id === productId
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          });
+        } else {
+          set({
+            items: items.filter((item) => item.product.id !== productId),
+          });
+        }
       },
       clearCart: () => set({ items: [] }),
       getTotal: () => {
