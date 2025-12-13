@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, ShoppingCart, Copy, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
+import { formatPrice } from '@/lib/utils';
 
 export function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((state) => state.addItem);
@@ -137,7 +138,7 @@ export function ProductCard({ product }: { product: Product }) {
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
           <span>{product.name}</span>
-          <span className="text-lg font-bold">${product.price}</span>
+          <span className="text-lg font-bold">{formatPrice(product.price)}</span>
         </CardTitle>
       </CardHeader>
       <CardContent>

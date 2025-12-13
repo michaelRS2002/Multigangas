@@ -22,6 +22,7 @@ import {
 import { Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { toast } from 'sonner';
+import { formatPrice } from '@/lib/utils';
 
 interface Category {
   id: string;
@@ -140,7 +141,7 @@ export function ProductManager() {
               </div>
               <div>
                 <h3 className="font-medium">{product.name}</h3>
-                <p className="text-sm text-gray-500">${product.price}</p>
+                <p className="text-sm text-gray-500">{formatPrice(product.price)}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">

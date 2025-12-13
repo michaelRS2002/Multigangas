@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { formatPrice } from '@/lib/utils';
 
 export function Cart() {
   const { items, removeItem, addItem, decreaseItem, getTotal } = useCartStore();
@@ -18,9 +19,9 @@ export function Cart() {
 
   const handleCheckout = () => {
     const message = items
-      .map((item) => `${item.product.name} x${item.quantity} - $${item.product.price * item.quantity}`)
+      .map((item) => `${item.product.name} x${item.quantity} - ${formatPrice(item.product.price * item.quantity)}`)
       .join('\n');
-    const finalMessage = `Hola, quiero hacer este pedido:\n\n${message}\n\nTotal: $${total}`;
+    const finalMessage = `Hola, quiero hacer este pedido:\n\n${message}\n\nTotal: ${formatPrice(total)}`;
     const encodedMessage = encodeURIComponent(finalMessage);
     // Replace with your phone number
     const phoneNumber = '573225766513'; 
@@ -73,7 +74,7 @@ export function Cart() {
                   <div className="flex-1">
                     <h4 className="font-medium line-clamp-2">{item.product.name}</h4>
                     <p className="text-sm text-gray-500 mt-1">
-                      ${item.product.price}
+                      {formatPrice(item.product.price)}
                     </p>
                     
                     <div className="flex items-center justify-between mt-2">
@@ -117,7 +118,7 @@ export function Cart() {
           <div className="pt-6 border-t mt-auto">
             <div className="flex justify-between font-bold text-lg mb-4">
               <span>Total:</span>
-              <span>${total}</span>
+              <span>{formatPrice(total)}</span>
             </div>
             <Button className="w-full size-lg" onClick={handleCheckout}>
               Enviar Pedido por WhatsApp
