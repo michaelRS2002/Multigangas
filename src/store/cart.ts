@@ -13,6 +13,7 @@ export interface Product {
   price: number;
   images: ProductImage[];
   category_id?: string;
+  is_out_of_stock?: boolean;
 }
 
 export interface CartItem {

@@ -15,6 +15,7 @@ export function ProductCard({ product }: { product: Product }) {
   const currentImage = images[currentImageIndex];
 
   const handleAddToCart = () => {
+    if (product.is_out_of_stock) return;
     addItem(product);
     toast.success('Producto agregado al carrito', {
       duration: 2000,
@@ -127,6 +128,11 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
           </>
         )}
+        {product.is_out_of_stock && (
+          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold z-10">
+            AGOTADO
+          </div>
+        )}
       </div>
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
@@ -138,8 +144,19 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="text-sm text-gray-600 line-clamp-3">{product.description}</p>
       </CardContent>
       <CardFooter className="flex flex-col gap-2">
-        <Button className="w-full" onClick={handleAddToCart}>
-          <ShoppingCart className="mr-2 h-4 w-4" /> Agregar al Carrito
+        <Button 
+          className="w-full" 
+          onClick={handleAddToCart}
+          disabled={product.is_out_of_stock}
+          variant={product.is_out_of_stock ? "secondary" : "default"}
+        >
+          {product.is_out_of_stock ? (
+            'Agotado'
+          ) : (
+            <>
+              <ShoppingCart className="mr-2 h-4 w-4" /> Agregar al Carrito
+            </>
+          )}
         </Button>
         <div className="grid grid-cols-2 gap-2 w-full">
           <Button variant="outline" className="w-full" onClick={handleDownload}>

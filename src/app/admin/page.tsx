@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { AdminForm } from '@/components/AdminForm';
 import { CategoryManager } from '@/components/CategoryManager';
+import { ProductManager } from '@/components/ProductManager';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -111,6 +112,9 @@ export default function AdminPage() {
         </div>
         <CategoryManager onCategoryCreated={() => setRefreshKey(prev => prev + 1)} />
         <AdminForm key={refreshKey} />
+        <div className="mt-8">
+          <ProductManager key={`list-${refreshKey}`} />
+        </div>
       </div>
     </div>
   );
