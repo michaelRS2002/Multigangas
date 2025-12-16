@@ -87,13 +87,13 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Card className="w-full max-w-sm mx-auto overflow-hidden">
-      <div className="relative h-64 w-full group">
+      <div className="relative h-64 w-full group bg-white">
         {currentImage ? (
           <Image
             src={currentImage.image_url}
             alt={`${product.name} - Image ${currentImageIndex + 1}`}
             fill
-            className="object-cover"
+            className="object-contain p-2"
           />
         ) : (
           <div className="flex items-center justify-center h-full bg-gray-200">

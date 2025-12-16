@@ -124,13 +124,13 @@ export function ProductManager() {
             className="flex items-center justify-between p-4 border rounded-lg bg-white shadow-sm"
           >
             <div className="flex items-center gap-4">
-              <div className="relative h-16 w-16 rounded-md overflow-hidden bg-gray-100">
+              <div className="relative h-16 w-16 rounded-md overflow-hidden bg-white border">
                 {product.images?.[0]?.image_url && (
                   <Image
                     src={product.images[0].image_url}
                     alt={product.name}
                     fill
-                    className="object-cover"
+                    className="object-contain p-1"
                   />
                 )}
                 {product.is_out_of_stock && (

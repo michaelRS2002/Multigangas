@@ -56,13 +56,13 @@ export function Cart() {
             <div className="flex flex-col gap-6">
               {items.map((item) => (
                 <div key={item.product.id} className="flex gap-4 items-start border-b pb-4">
-                  <div className="relative h-20 w-20 rounded-md overflow-hidden bg-gray-100 flex-shrink-0">
+                  <div className="relative h-20 w-20 rounded-md overflow-hidden bg-white border flex-shrink-0">
                     {item.product.images?.[0]?.image_url ? (
                       <Image
                         src={item.product.images[0].image_url}
                         alt={item.product.name}
                         fill
-                        className="object-cover"
+                        className="object-contain p-1"
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full text-gray-400 text-xs">
@@ -116,7 +116,7 @@ export function Cart() {
         
         {items.length > 0 && (
           <div className="pt-6 border-t mt-auto">
-            <div className="flex justify-between font-bold text-lg mb-4">
+            <div className="flex justify-center gap-2 font-bold text-2xl mb-4">
               <span>Total:</span>
               <span>{formatPrice(total)}</span>
             </div>
